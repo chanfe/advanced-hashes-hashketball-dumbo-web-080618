@@ -119,39 +119,39 @@ def game_hash
 end
 
 def num_points_scored(p_name)
+  answer = {}
   game_hash.each do |location, team_data|
-    team_data[:players].each do |name|
-      if name[0] == p_name
-        return name[1][:points]
-      end
+    if team_data[:players][p_name] != nil
+      answer = team_data[:players][p_name][:points]
     end
   end
+  answer
 end
 
 def shoe_size(p_name)
+  answer = {}
   game_hash.each do |location, team_data|
-    team_data[:players].each do |name|
-      if name[0] == p_name
-        return name[1][:shoe]
-      end
+    if team_data[:players][p_name] != nil
+        answer = team_data[:players][p_name][:shoe]
     end
   end
+  answer
 end
 
 def team_colors(t_name)
+  answer = {}
   game_hash.each do |location, team_data|
     if team_data[:team_name] == t_name
-      return team_data[:colors]
+      answer = team_data[:colors]
     end
   end
+  answer
 end
 
 def team_names
-  team_arr = []
-  game_hash.each do |location, team_data|
-    team_arr << team_data[:team_name]
+  game_hash.map do |location, team_data|
+    team_data[:team_name]
   end
-  team_arr
 end
 
 def player_numbers(t_name)
@@ -167,13 +167,13 @@ def player_numbers(t_name)
 end
 
 def player_stats(p_name)
+  answer = {}
   game_hash.each do |location, team_data|
-    team_data[:players].each do |name|
-      if name[0] == p_name
-        return name[1]
-      end
+    if team_data[:players][p_name] != nil
+      answer = team_data[:players][p_name]
     end
   end
+  answer
 end
 
 def big_shoe_rebounds
@@ -250,11 +250,7 @@ def long_name_steals_a_ton?
       end
     end
   end
-  if p_name == player_with_longest_name
-    true
-  else
-    false
-  end
+  p_name == player_with_longest_name
 end
 
 
